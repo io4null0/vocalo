@@ -12,6 +12,38 @@ const phonemeMap = {
   'お': 'utau_samples/o.wav',
   'か': 'utau_samples/ka.wav',
   'き': 'utau_samples/ki.wav',
+   'く': 'utau_samples/ku.wav',
+   'け': 'utau_samples/ke.wav',
+   'こ': 'utau_samples/ko.wav',
+   'さ': 'utau_samples/sa.wav',
+   'し': 'utau_samples/si.wav',
+   'す': 'utau_samples/su.wav',
+   'せ': 'utau_samples/se.wav',
+   'そ': 'utau_samples/so.wav',
+   'た': 'utau_samples/ta.wav',
+   'ち': 'utau_samples/ti.wav',
+   'つ': 'utau_samples/tu.wav',
+   'て': 'utau_samples/te.wav',
+   'と': 'utau_samples/to.wav',
+   'な': 'utau_samples/na.wav',
+   'に': 'utau_samples/ni.wav',
+   'ぬ': 'utau_samples/nu.wav',
+   'ね': 'utau_samples/ne.wav',
+   'の': 'utau_samples/no.wav',
+   'は': 'utau_samples/ha.wav',
+   'ひ': 'utau_samples/hi.wav',
+   'ふ': 'utau_samples/hu.wav',
+   'へ': 'utau_samples/he.wav',
+   'ほ': 'utau_samples/ho.wav',
+   'ま': 'utau_samples/ma.wav',
+   'み': 'utau_samples/mi.wav',
+   'む': 'utau_samples/mu.wav',
+   'め': 'utau_samples/me.wav',
+   'も': 'utau_samples/mo.wav',
+  
+  
+  
+　
   // 他の50音もここに追加
 };
 
