@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web UTAU Synth with 50音</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Web UTAU Synth - 50音対応</h1>
+
+    <div class="controls">
+      <button id="playButton">Play</button>
+      <button id="stopButton">Stop</button>
+    </div>
+
+    <div class="piano-roll">
+      <canvas id="pianoCanvas" width="800" height="200"></canvas>
+    </div>
+
+    <div class="phoneme-list">
+      <p>選択された音素: <span id="selectedPhoneme">あ</span></p>
+      <select id="phonemeSelector">
+        <!-- 50音リスト -->
+        <option value="a">あ</option>
+        <option value="i">い</option>
+        <option value="u">う</option>
+        <option value="e">え</option>
+        <option value="o">お</option>
+        <option value="ka">か</option>
+        <option value="ki">き</option>
+        <!-- 以下省略、残りの50音を追加 -->
+      </select>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
