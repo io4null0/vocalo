@@ -20,43 +20,56 @@ async function loadSample(phoneme) {
   if (audioBuffers[phoneme]) {
     return audioBuffers[phoneme];
   }
-  const response = await fetch(phonemeMap[phoneme]);
-  const arrayBuffer = await response.arrayBuffer();
-  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-  audioBuffers[phoneme] = audioBuffer; // キャッシュに保存
-  return audioBuffer;
+
+  try {
+    const response = await fetch(phonemeMap[phoneme]);
+    if (!response.ok) {
+      throw new Error(`Failed to load ${phonemeMap[phoneme]}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    audioBuffers[phoneme] = audioBuffer; // キャッシュに保存
+    return audioBuffer;
+  } catch (error) {
+    console.error('Error loading sample:', error);
+    return null;
+  }
 }
 
 // 音素を結合して再生する
 async function playSequence(phonemes) {
   if (isPlaying) return; // 既に再生中の場合は無視
 
+  isPlaying = true;
   let currentTime = audioContext.currentTime; // 現在のオーディオコンテキスト時間を取得
 
-  for (let i = 0; i < phonemes.length; i++) {
-    const phoneme = phonemes[i];
-
+  for (const phoneme of phonemes) {
     if (phonemeMap[phoneme]) {
       const buffer = await loadSample(phoneme); // 音素に対応するWAVファイルをロード
-      const source = audioContext.createBufferSource();
-      source.buffer = buffer;
-      source.connect(audioContext.destination);
+      if (buffer) {
+        const source = audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioContext.destination);
 
-      // 適切なタイミングで音声を再生
-      source.start(currentTime);
-      sources.push(source);
+        // 適切なタイミングで音声を再生
+        source.start(currentTime);
+        sources.push(source);
 
-      // 次の音素の再生開始時間を計算
-      currentTime += buffer.duration;
+        // 次の音素の再生開始時間を計算
+        currentTime += buffer.duration;
+      }
     }
   }
 
-  isPlaying = true;
-
   // 全ての再生が終了したらフラグを戻す
-  sources[sources.length - 1].onended = () => {
-    isPlaying = false;
-  };
+  const lastSource = sources[sources.length - 1];
+  if (lastSource) {
+    lastSource.onended = () => {
+      isPlaying = false;
+    };
+  } else {
+    isPlaying = false; // 何も再生しなかった場合のため
+  }
 }
 
 // 再生を停止する
@@ -87,7 +100,7 @@ window.addEventListener('load', () => {
   // 簡単なピアノロールを描画
   const canvas = document.getElementById('pianoCanvas');
   const ctx = canvas.getContext('2d');
-  
+
   function drawPianoRoll() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#e74c3c';
