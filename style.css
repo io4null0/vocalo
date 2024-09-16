@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  text-align: center;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 5px;
+}
+
+.piano-roll {
+  border: 2px solid #333;
+  display: inline-block;
+  position: relative;
+}
+
+.phoneme-list {
+  margin-top: 20px;
+}
