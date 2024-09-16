@@ -19,12 +19,13 @@ button {
   margin: 5px;
 }
 
+input {
+  font-size: 16px;
+  padding: 5px;
+}
+
 .piano-roll {
   border: 2px solid #333;
   display: inline-block;
   position: relative;
-}
-
-.phoneme-list {
-  margin-top: 20px;
 }
